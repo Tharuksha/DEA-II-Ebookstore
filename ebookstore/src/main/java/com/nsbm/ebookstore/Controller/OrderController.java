@@ -30,12 +30,12 @@ public class OrderController {
     @DeleteMapping("/{orderId}")
     public ResponseEntity<?> deleteOrder(@PathVariable Long orderId) {
         orderService.deleteOrder(orderId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok("Deleted Successfully");
     }
 
     @PutMapping("/{orderId}")
-    public ResponseEntity<Order> updateOrder(@PathVariable Long orderId, @RequestBody Order order) {
+    public ResponseEntity<String> updateOrder(@PathVariable Long orderId, @RequestBody Order order) {
         Order updatedOrder = orderService.updateOrder(orderId, order);
-        return ResponseEntity.ok(updatedOrder);
+        return ResponseEntity.ok("Updated Successfully");
     }
 }
