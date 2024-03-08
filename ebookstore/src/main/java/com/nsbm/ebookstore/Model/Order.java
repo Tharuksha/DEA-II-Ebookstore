@@ -89,5 +89,32 @@ public class Order {
     public void setNote(String note) {
         this.note = note;
     }
+
+    // Additional logic for managing id
+    @PreRemove
+    private void preRemove() {
+        // Capture the id before deletion
+        Long deletedId = this.id;
+
+        // Perform the removal logic
+        // (This logic depends on how you remove entities, e.g., using Spring Data JPA repository)
+        // For example, using Spring Data JPA repository:
+
+        // orderRepository.deleteById(deletedId);
+
+        // Update the remaining records' ids
+        if (deletedId != null) {
+            updateRemainingIds(deletedId);
+        }
+    }
+
+    private void updateRemainingIds(Long deletedId) {
+        // You need to implement a method to update the remaining records' ids.
+        // For example, you can use a custom query to update ids in the database.
+        // The exact logic would depend on your data access technology (e.g., Spring Data JPA, Hibernate, etc.).
+
+        // Example (using Spring Data JPA):
+        // orderRepository.updateIdsAfterDeletion(deletedId);
+    }
 }
 
