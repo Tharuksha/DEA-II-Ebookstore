@@ -25,24 +25,31 @@ public class ReviewService {
     }
 
     // Comment operations
+
+    //add comment
     public ReviewModel addComment(ReviewModel reviewModel) {
         return reviewRepository.save(reviewModel);
     }
+
+    //delete comments
 
     public void deleteComment(Long id) {
         reviewRepository.deleteById(id);
     }
 
+    //update comments
+
     public ReviewModel updateComment(Long id, String comment) {
         ReviewModel reviewModel = reviewRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid review id: " + id));
-
         reviewModel.setComment(comment);
 
         return reviewRepository.save(reviewModel);
     }
 
     // Rating operations
+
+    //Add rating
     public ReviewModel addRating(Long id, int rating) {
         ReviewModel reviewModel = reviewRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid review id: " + id));
@@ -52,6 +59,8 @@ public class ReviewService {
         return reviewRepository.save(reviewModel);
     }
 
+    //delete rating
+
     public void deleteRating(Long id) {
         ReviewModel reviewModel = reviewRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid review id: " + id));
@@ -60,6 +69,8 @@ public class ReviewService {
 
         reviewRepository.save(reviewModel);
     }
+
+    //update rating
 
     public ReviewModel updateRating(Long id, int rating) {
         ReviewModel reviewModel = reviewRepository.findById(id)

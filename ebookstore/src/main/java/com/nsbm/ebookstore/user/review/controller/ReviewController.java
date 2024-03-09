@@ -17,17 +17,17 @@ public class ReviewController {
     private ReviewService reviewService;
 
     // Retrieve all comments
-    @GetMapping()
+    @GetMapping("/comments")
     public List<ReviewModel> getAllComments() {
         return reviewService.getAllComments();
     }
 
-    // Retrieve all ratings
+     //Retrieve all ratings
     @GetMapping("/ratings")
     public ResponseEntity<List<ReviewModel>> getAllRatings() {
         List<ReviewModel> ratings = reviewService.getAllRatings();
-        List<ReviewModel> rating = null;
-        return ResponseEntity.ok(rating);
+//        List<ReviewModel> rating = null;
+        return ResponseEntity.ok(ratings);
     }
 
     //add comment
@@ -39,8 +39,8 @@ public class ReviewController {
 
     //delete comment
     @DeleteMapping("/deleteComment/{id}")
-    public ResponseEntity<?> deleteComment(@PathVariable("id") Long id){
-        reviewService.deleteComment(id);
+    public ResponseEntity<?> deleteComment(@PathVariable("id") Long comment){
+        reviewService.deleteComment(comment);
         return ResponseEntity.ok("comment deleted successfully");
     }
 
