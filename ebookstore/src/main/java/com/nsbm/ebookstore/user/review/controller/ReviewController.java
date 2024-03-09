@@ -6,12 +6,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/review")
 
 public class ReviewController {
     @Autowired
     private ReviewService reviewService;
+
+    // Retrieve all comments
+    @GetMapping()
+    public List<ReviewModel> getAllComments() {
+        return reviewService.getAllComments();
+    }
+
+    // Retrieve all ratings
+    @GetMapping("/ratings")
+    public ResponseEntity<List<ReviewModel>> getAllRatings() {
+        List<ReviewModel> ratings = reviewService.getAllRatings();
+        List<ReviewModel> rating = null;
+        return ResponseEntity.ok(rating);
+    }
 
     //add comment
     @PostMapping("/addComment")

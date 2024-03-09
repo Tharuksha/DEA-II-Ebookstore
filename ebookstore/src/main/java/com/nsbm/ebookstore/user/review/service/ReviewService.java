@@ -14,6 +14,16 @@ public class ReviewService {
 
     public ReviewRepository reviewRepository;
 
+    // Retrieve all comments
+    public List<ReviewModel> getAllComments() {
+        return reviewRepository.findAll();
+    }
+
+    // Retrieve all ratings
+    public List<ReviewModel> getAllRatings() {
+        return reviewRepository.findAll();
+    }
+
     // Comment operations
     public ReviewModel addComment(ReviewModel reviewModel) {
         return reviewRepository.save(reviewModel);
