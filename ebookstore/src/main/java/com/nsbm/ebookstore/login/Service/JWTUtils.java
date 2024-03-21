@@ -26,7 +26,7 @@ public class JWTUtils {
         return Jwts.builder()
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + Expiration_Time ))
+                .expiration(new Date(System.currentTimeMillis()  ))
                 .signWith(Key)
                 .compact();
     }
