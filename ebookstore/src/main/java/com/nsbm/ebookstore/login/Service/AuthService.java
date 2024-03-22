@@ -1,13 +1,15 @@
 package com.nsbm.ebookstore.login.Service;
-
 import com.nsbm.ebookstore.login.Dto.ReqRes;
 import com.nsbm.ebookstore.login.Entity.Users;
 import com.nsbm.ebookstore.login.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 import java.util.HashMap;
 
@@ -25,6 +27,12 @@ public class AuthService {
     public ReqRes signUp(ReqRes registrationRequest){
         ReqRes resp = new ReqRes();
         try {
+            if (userRepository.existsByEmail(registrationRequest.getEmail())) {
+                resp.setStatusCode(400);
+                resp.setMessage("User with this email already registered");
+                return resp;
+            }
+
             Users ausers = new Users();
             ausers.setEmail(registrationRequest.getEmail());
             ausers.setF_name((registrationRequest.getF_name()));
@@ -32,12 +40,12 @@ public class AuthService {
             ausers.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
             ausers.setRole(registrationRequest.getRole());
             Users UserResult = userRepository.save(ausers);
-            if (UserResult.getId()>0) {
+            if (UserResult.getId() > 0) {
                 resp.setUsers(UserResult);
                 resp.setMessage("User Saved Successfully");
                 resp.setStatusCode(200);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             resp.setStatusCode(500);
             resp.setError(e.getMessage());
         }
@@ -56,6 +64,7 @@ public class AuthService {
             response.setStatusCode(200);
             response.setToken(jwt);
             response.setRefreshToken(refreshToken);
+            response.setRole(user.getRole());
             response.setExpirationTime("24Hr");
             response.setMessage("Successfully Signed In");
         }catch (Exception e){
