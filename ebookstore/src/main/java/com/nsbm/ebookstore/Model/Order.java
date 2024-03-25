@@ -1,6 +1,6 @@
 package com.nsbm.ebookstore.Model;
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "orders")
@@ -9,30 +9,33 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String userName;
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "contact_number")
     private String contactNumber;
+
+    @Column(name = "delivery_date")
     private String deliveryDate;
-    private String time;
+
+    @Column(name = "shipping_address")
     private String shippingAddress;
+
+    @Column(name = "note")
     private String note;
-
-
-
 
     public Order() {
     }
 
-    // Parameterized constructor
-    public Order(String userName, String contactNumber, String deliveryDate, String time, String shippingAddress, String note) {
-        this.userName = userName;
+    // Constructor and getter/setter methods
+
+    public Order(String username, String contactNumber, String deliveryDate, String shippingAddress, String note) {
+        this.name = name;
         this.contactNumber = contactNumber;
         this.deliveryDate = deliveryDate;
-        this.time = time;
         this.shippingAddress = shippingAddress;
         this.note = note;
     }
-
-    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -42,12 +45,12 @@ public class Order {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getname() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.name = name;
     }
 
     public String getContactNumber() {
@@ -66,14 +69,6 @@ public class Order {
         this.deliveryDate = deliveryDate;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
     public String getShippingAddress() {
         return shippingAddress;
     }
@@ -89,32 +84,4 @@ public class Order {
     public void setNote(String note) {
         this.note = note;
     }
-
-    // Additional logic for managing id
-    @PreRemove
-    private void preRemove() {
-        // Capture the id before deletion
-        Long deletedId = this.id;
-
-        // Perform the removal logic
-        // (This logic depends on how you remove entities, e.g., using Spring Data JPA repository)
-        // For example, using Spring Data JPA repository:
-
-        // orderRepository.deleteById(deletedId);
-
-        // Update the remaining records' ids
-        if (deletedId != null) {
-            updateRemainingIds(deletedId);
-        }
-    }
-
-    private void updateRemainingIds(Long deletedId) {
-        // You need to implement a method to update the remaining records' ids.
-        // For example, you can use a custom query to update ids in the database.
-        // The exact logic would depend on your data access technology (e.g., Spring Data JPA, Hibernate, etc.).
-
-        // Example (using Spring Data JPA):
-        // orderRepository.updateIdsAfterDeletion(deletedId);
-    }
 }
-

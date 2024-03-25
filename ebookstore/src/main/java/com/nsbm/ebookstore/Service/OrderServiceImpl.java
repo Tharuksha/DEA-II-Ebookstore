@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -19,14 +20,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getAllOrders() {
-        // Add any additional logic you need to retrieve all orders
         return orderRepository.findAll();
     }
 
     @Override
     public Order placeOrder(Order order) {
-        // Add any additional logic you need before saving the order
-        // For example, setting order status, calculating totals, etc.
         return orderRepository.save(order);
     }
 
@@ -34,12 +32,27 @@ public class OrderServiceImpl implements OrderService {
     public Order updateOrder(Long orderId, Order order) {
         // Check if the order with the given orderId exists before updating
         if (orderRepository.existsById(orderId)) {
-            // Set the id of the order to update
-            order.setId(orderId);
-            // Add any additional logic you need before updating the order
-            return orderRepository.save(order);
+            // Fetch the existing order from the repository
+            Optional<Order> existingOrderOptional = orderRepository.findById(orderId);
+            if (existingOrderOptional.isPresent()) {
+                Order existingOrder = existingOrderOptional.get();
+
+                // Update the fields of the existing order with the new values
+                existingOrder.setUsername(order.getname());
+                existingOrder.setContactNumber(order.getContactNumber());
+                existingOrder.setDeliveryDate(order.getDeliveryDate());
+                existingOrder.setShippingAddress(order.getShippingAddress());
+                existingOrder.setNote(order.getNote());
+
+                // Save the updated order
+                return orderRepository.save(existingOrder);
+            } else {
+                // Handle the case where the order with the given ID does not exist
+                // You can throw an exception, return null, or handle it based on your requirements
+                return null;
+            }
         } else {
-            // Handle the case where the order does not exist
+            // Handle the case where the order with the given ID does not exist
             // You can throw an exception, return null, or handle it based on your requirements
             return null;
         }
@@ -56,5 +69,4 @@ public class OrderServiceImpl implements OrderService {
             // You can throw an exception, log a message, or handle it based on your requirements
         }
     }
-    // Implement more methods as needed
 }
