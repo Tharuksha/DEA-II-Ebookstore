@@ -38,7 +38,7 @@ public class OrderServiceImpl implements OrderService {
                 Order existingOrder = existingOrderOptional.get();
 
                 // Update the fields of the existing order with the new values
-                existingOrder.setUsername(order.getname());
+                existingOrder.setName(order.getname());
                 existingOrder.setContactNumber(order.getContactNumber());
                 existingOrder.setDeliveryDate(order.getDeliveryDate());
                 existingOrder.setShippingAddress(order.getShippingAddress());

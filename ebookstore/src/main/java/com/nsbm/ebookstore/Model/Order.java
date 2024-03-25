@@ -11,6 +11,8 @@ public class Order {
 
     @Column(name = "name")
     private String name;
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "contact_number")
     private String contactNumber;
@@ -49,8 +51,16 @@ public class Order {
         return name;
     }
 
-    public void setUsername(String username) {
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getContactNumber() {
