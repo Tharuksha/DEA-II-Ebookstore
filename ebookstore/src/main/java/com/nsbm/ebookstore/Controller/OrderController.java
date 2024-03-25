@@ -22,6 +22,16 @@ public class OrderController {
         return orderService.getAllOrders();
     }
 
+    @GetMapping("/{orderId}")
+    public ResponseEntity<Order> getOrderById(@PathVariable Long orderId) {
+        Order order = orderService.getOrderById(orderId);
+        if (order != null) {
+            return ResponseEntity.ok(order);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PostMapping
     public ResponseEntity<Order> placeOrder(@RequestBody Order order) {
         Order placedOrder = orderService.placeOrder(order);

@@ -69,4 +69,10 @@ public class OrderServiceImpl implements OrderService {
             // You can throw an exception, log a message, or handle it based on your requirements
         }
     }
+
+    @Override
+    public Order getOrderById(Long orderId) {
+        Optional<Order> optionalOrder = orderRepository.findById(orderId);
+        return optionalOrder.orElse(null);
+    }
 }
