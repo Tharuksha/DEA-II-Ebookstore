@@ -62,10 +62,12 @@ public class AuthService {
             var jwt = jwtUtils.generateToken(user);
             var refreshToken = jwtUtils.generateRefreshToken(new HashMap<>(), user);
             response.setStatusCode(200);
+            response.setF_name(user.getF_name());
+            response.setL_name(user.getL_name());
+            response.setExpirationTime("24Hr");
             response.setToken(jwt);
             response.setRefreshToken(refreshToken);
             response.setRole(user.getRole());
-            response.setExpirationTime("24Hr");
             response.setMessage("Successfully Signed In");
         }catch (Exception e){
             response.setStatusCode(500);
