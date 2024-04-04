@@ -3,8 +3,6 @@ import com.nsbm.ebookstore.login.Dto.ReqRes;
 import com.nsbm.ebookstore.login.Entity.Users;
 import com.nsbm.ebookstore.login.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,12 +33,12 @@ public class AuthService {
 
             Users ausers = new Users();
             ausers.setEmail(registrationRequest.getEmail());
-            ausers.setF_name((registrationRequest.getF_name()));
-            ausers.setL_name((registrationRequest.getL_name()));
+            ausers.setFirstname((registrationRequest.getFirstname()));
+            ausers.setLastname((registrationRequest.getLastname()));
             ausers.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
             ausers.setRole(registrationRequest.getRole());
             Users UserResult = userRepository.save(ausers);
-            if (UserResult.getId() > 0) {
+            if (UserResult.getUserid() > 0) {
                 resp.setUsers(UserResult);
                 resp.setMessage("User Saved Successfully");
                 resp.setStatusCode(200);
@@ -62,8 +60,8 @@ public class AuthService {
             var jwt = jwtUtils.generateToken(user);
             var refreshToken = jwtUtils.generateRefreshToken(new HashMap<>(), user);
             response.setStatusCode(200);
-            response.setF_name(user.getF_name());
-            response.setL_name(user.getL_name());
+            response.setFirstname(user.getFirstname());
+            response.setLastname(user.getLastname());
             response.setExpirationTime("24Hr");
             response.setToken(jwt);
             response.setRefreshToken(refreshToken);

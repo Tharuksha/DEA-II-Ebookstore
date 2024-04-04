@@ -1,49 +1,48 @@
 package com.nsbm.ebookstore.login.Entity;
-
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
 import java.util.List;
 
 @Data
 @Entity
+
 @Table(name = "users")
 public class Users implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String f_name;
-    private String l_name;
+    private Long userid;
+    private String firstname;
+    private String lastname;
     private String email;
     private String password;
     private String role;
 
-    public Integer getId() {
-        return id;
+    public Long getUserid() {
+        return userid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserid(Long userid) {
+        this.userid = userid;
     }
 
-    public String getF_name() {
-        return f_name;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setF_name(String f_name) {
-        this.f_name = f_name;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getL_name() {
-        return l_name;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setL_name(String l_name) {
-        this.l_name = l_name;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
