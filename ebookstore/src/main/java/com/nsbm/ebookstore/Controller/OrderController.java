@@ -10,26 +10,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST})
-@RequestMapping("/api/orders")
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+@RequestMapping(OrderController.ORDER_BASE_URL)
 public class OrderController {
+
+    public static final String ORDER_BASE_URL = "/api/orders";
+    public static final String ALL_ORDERS_ENDPOINT = "/all";
+    public static final String ORDER_BY_ID_ENDPOINT = "/{orderId}";
+    public static final String DELETE_SUCCESS_MESSAGE = "Deleted Successfully";
+    public static final String UPDATE_SUCCESS_MESSAGE = "Updated Successfully";
 
     @Autowired
     private OrderService orderService;
 
-    @GetMapping
-    public List<Order> getAllOrders() {
-        return orderService.getAllOrders();
+    @GetMapping(ALL_ORDERS_ENDPOINT)
+    public ResponseEntity<List<Order>> getAllOrders() {
+        List<Order> orders = orderService.getAllOrders();
+        return orders.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(orders);
     }
 
-    @GetMapping("/{orderId}")
+    @GetMapping(ORDER_BY_ID_ENDPOINT)
     public ResponseEntity<Order> getOrderById(@PathVariable Long orderId) {
         Order order = orderService.getOrderById(orderId);
-        if (order != null) {
-            return ResponseEntity.ok(order);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return order != null ? ResponseEntity.ok(order) : ResponseEntity.notFound().build();
     }
 
     @PostMapping
@@ -38,15 +41,15 @@ public class OrderController {
         return new ResponseEntity<>(placedOrder, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{orderId}")
+    @DeleteMapping(ORDER_BY_ID_ENDPOINT)
     public ResponseEntity<?> deleteOrder(@PathVariable Long orderId) {
         orderService.deleteOrder(orderId);
-        return ResponseEntity.ok("Deleted Successfully");
+        return ResponseEntity.ok(DELETE_SUCCESS_MESSAGE);
     }
 
-    @PutMapping("/{orderId}")
+    @PutMapping(ORDER_BY_ID_ENDPOINT)
     public ResponseEntity<String> updateOrder(@PathVariable Long orderId, @RequestBody Order order) {
         Order updatedOrder = orderService.updateOrder(orderId, order);
-        return ResponseEntity.ok("Updated Successfully");
+        return ResponseEntity.ok(UPDATE_SUCCESS_MESSAGE);
     }
 }
