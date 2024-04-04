@@ -33,17 +33,11 @@ public class AdminController {
         }
     }
 
-    @PostMapping
-    public ResponseEntity<Users> createUser(@RequestBody Users user) {
-        Users savedUser = adminService.saveUser(user);
-        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<Users> updateUser(@PathVariable("id") Long id, @RequestBody Users user) {
         Users existingUser = adminService.getUserById(id);
         if (existingUser != null) {
-            user.setId(id.intValue()); // Convert Long to Integer
+            user.setUserid(id);
             Users updatedUser = adminService.saveUser(user);
             return new ResponseEntity<>(updatedUser, HttpStatus.OK);
         } else {
