@@ -13,6 +13,12 @@ import java.util.List;
 @RequestMapping("/review")
 
 public class ReviewController {
+    public static final String ALL_COMMENTS_ENDPOINT = "/comments";
+    public static final String ADD_COMMENT_ENDPOINT = "/addComment";
+    public static final String DELETE_COMMENT_ENDPOINT = "/delete/{id}";
+    public static final String UPDATE_COMMENT_ENDPOINT = "/update/{id}";
+
+
     @Autowired
     private ReviewService reviewService;
 
@@ -22,13 +28,6 @@ public class ReviewController {
         return reviewService.getAllComments();
     }
 
-     //Retrieve all ratings
-    @GetMapping("/ratings")
-    public ResponseEntity<List<ReviewModel>> getAllRatings() {
-        List<ReviewModel> ratings = reviewService.getAllRatings();
-//        List<ReviewModel> rating = null;
-        return ResponseEntity.ok(ratings);
-    }
 
     //add comment
     @PostMapping("/addComment")
@@ -39,8 +38,8 @@ public class ReviewController {
 
     //delete comment
     @DeleteMapping("/deleteComment/{id}")
-    public ResponseEntity<?> deleteComment(@PathVariable("id") Long comment){
-        reviewService.deleteComment(comment);
+    public ResponseEntity<?> deleteComment(@PathVariable("id") Long id){
+        reviewService.deleteComment(id);
         return ResponseEntity.ok("comment deleted successfully");
     }
 
@@ -51,24 +50,4 @@ public class ReviewController {
         return ResponseEntity.ok(updatedReview);
     }
 
-    //add rating
-    @PostMapping("/addRating/{id}")
-    public ResponseEntity<ReviewModel> addRating(@PathVariable("id") Long id,@RequestParam("rating") int rating){
-        ReviewModel updatedReview = reviewService.addRating(id, rating);
-        return ResponseEntity.ok(updatedReview);
-    }
-
-    //delete rating
-    @DeleteMapping("/deleteRating/{id}")
-    public ResponseEntity<?> deleteRating(@PathVariable("id") Long id){
-        reviewService.deleteRating(id);
-        return ResponseEntity.ok("Rating deleted successfully");
-    }
-
-    //update rating
-    @PutMapping("/updateRating/{id}")
-    public ResponseEntity<ReviewModel> updateRating(@PathVariable("id")Long id,@RequestParam("rating")int rating){
-        ReviewModel updateReview = reviewService.updateRating(id,rating);
-        return ResponseEntity.ok(updateReview);
-    }
 }
