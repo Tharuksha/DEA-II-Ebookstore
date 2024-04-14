@@ -16,20 +16,20 @@ public class BookController {
     private BookService bookService;
 
     //Retrieve all books
-    @GetMapping("/getAllBooks")
+    @GetMapping("/getAll")
     public List<BookModel> getAllBooks(){
         return bookService.getAllBooks();
     }
 
     //add book
-    @PostMapping("/addBook")
+    @PostMapping("/add")
     public ResponseEntity<BookModel> addBook(@RequestBody BookModel bookModel){
         BookModel addedBook = bookService.addBook(bookModel);
         return ResponseEntity.ok(addedBook);
     }
 
     //update Book
-    @PutMapping("/updateBook/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<BookModel> updateBook(
             @PathVariable("id") Long id,
             @RequestBody BookModel updateRequest
@@ -41,14 +41,13 @@ public class BookController {
                 updateRequest.getBookAuthor(),
                 updateRequest.getPublisher(),
                 updateRequest.getAddedOn(),
-                updateRequest.getRemovedOn(),
                 updateRequest.getQuantity()
         );
         return ResponseEntity.ok(updatedBook);
     }
 
     //delete book
-    @DeleteMapping("/deleteBook/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteBook(@PathVariable("id") Long id){
         bookService.deleteBook(id);
         return ResponseEntity.ok("Deleted book successfully");

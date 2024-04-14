@@ -30,7 +30,7 @@ public class BookService {
     }
 
     //update book
-    public BookModel updateBook(Long id, String isbn, String bookName, String bookAuthor, String publisher, Date addedOn, Date removedOn, int quantity) {
+    public BookModel updateBook(Long id, String isbn, String bookName, String bookAuthor, String publisher, Date addedOn,  int quantity) {
         BookModel bookModel = bookServiceRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid book id: " + id));
 
@@ -40,7 +40,6 @@ public class BookService {
         bookModel.setBookAuthor(bookAuthor);
         bookModel.setPublisher(publisher);
         bookModel.setAddedOn(addedOn);
-        bookModel.setRemovedOn(removedOn);
         bookModel.setQuantity(quantity);
 
         return bookServiceRepository.save(bookModel);

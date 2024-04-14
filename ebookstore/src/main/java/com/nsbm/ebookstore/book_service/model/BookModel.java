@@ -19,6 +19,5 @@ public class BookModel {
     private String bookAuthor;
     private String publisher;
     private Date addedOn;
-    private Date removedOn;
     private int quantity;
 }
