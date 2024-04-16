@@ -12,8 +12,12 @@ public class ReviewModel {
     private Long reviewid;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "bookid")
     private  book_model book_model;
+
+    @ManyToOne
+    @JoinColumn(name = "userid")
+    private  user_model user_model;
 
     @Column
     private String comment;
