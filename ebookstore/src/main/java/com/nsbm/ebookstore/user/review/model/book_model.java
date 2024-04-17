@@ -12,5 +12,5 @@ import lombok.Setter;
 public class book_model {
 
     @Id
-    private int bookid;
+    private int book_id;
 }

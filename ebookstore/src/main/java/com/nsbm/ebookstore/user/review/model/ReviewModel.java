@@ -12,7 +12,7 @@ public class ReviewModel {
     private Long reviewid;
 
     @ManyToOne
-    @JoinColumn(name = "bookid")
+    @JoinColumn(name = "book_id")
     private  book_model book_model;
 
     @ManyToOne
