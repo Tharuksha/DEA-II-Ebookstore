@@ -3,28 +3,21 @@ package com.nsbm.ebookstore.user.review.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigInteger;
+
 @Data
 @Entity
 
 public class ReviewModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long reviewid;
+    private BigInteger reviewid;
 
-    @ManyToOne
-    @JoinColumn(name = "book_id")
-    private  book_model book_model;
+    private  int book_id;
 
-    @ManyToOne
-    @JoinColumn(name = "userid")
-    private  user_model user_model;
+    private int  userid;
 
-    @Column
-    private String comment;
+    private String comments;
 
-    @Column
     public int rating;
-
-
-
 }

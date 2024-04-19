@@ -13,11 +13,6 @@ import java.util.List;
 @RequestMapping("/review")
 
 public class ReviewController {
-    public static final String ALL_COMMENTS_ENDPOINT = "/comments";
-    public static final String ADD_COMMENT_ENDPOINT = "/addComment";
-    public static final String DELETE_COMMENT_ENDPOINT = "/delete/{id}";
-    public static final String UPDATE_COMMENT_ENDPOINT = "/update/{id}";
-
 
     @Autowired
     private ReviewService reviewService;

@@ -10,8 +10,8 @@ import java.util.List;
 @Service
 
 public class ReviewService {
-    @Autowired
 
+    @Autowired
     public ReviewRepository reviewRepository;
 
     // Retrieve all comments
@@ -37,7 +37,7 @@ public class ReviewService {
     public ReviewModel updateComment(Long id, String comment) {
         ReviewModel reviewModel = reviewRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid review id: " + id));
-        reviewModel.setComment(comment);
+        reviewModel.setComments(comment);
 
         return reviewRepository.save(reviewModel);
     }
