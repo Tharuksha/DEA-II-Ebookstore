@@ -41,4 +41,14 @@ public class ReviewService {
 
         return reviewRepository.save(reviewModel);
     }
+
+    //get all reviews for certain book id
+    public List<ReviewModel> GetReviewsByBookId(int book_id){
+        return reviewRepository.findCommentsByBookID(book_id);
+    }
+
+    //get all users for certain book id
+    public List<ReviewModel> GetUsersByBookId(int userid){
+        return reviewRepository.findUsersByBookID(userid);
+    }
 }
