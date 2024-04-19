@@ -19,11 +19,6 @@ public class ReviewService {
         return reviewRepository.findAll();
     }
 
-    // Retrieve all ratings
-    public List<ReviewModel> getAllRatings() {
-        return reviewRepository.findAll();
-    }
-
     // Comment operations
 
     //add comment
@@ -46,40 +41,4 @@ public class ReviewService {
 
         return reviewRepository.save(reviewModel);
     }
-
-    // Rating operations
-
-    //Add rating
-    public ReviewModel addRating(Long id, int rating) {
-        ReviewModel reviewModel = reviewRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid review id: " + id));
-
-        reviewModel.setRating(rating);
-
-        return reviewRepository.save(reviewModel);
-    }
-
-    //delete rating
-
-    public void deleteRating(Long id) {
-        ReviewModel reviewModel = reviewRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid review id: " + id));
-
-        reviewModel.setRating(0); // Assuming 0 indicates no rating
-
-        reviewRepository.save(reviewModel);
-    }
-
-    //update rating
-
-    public ReviewModel updateRating(Long id, int rating) {
-        ReviewModel reviewModel = reviewRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid review id: " + id));
-
-        reviewModel.setRating(rating);
-
-        return reviewRepository.save(reviewModel);
-    }
-    //create seperate file which hardcoded
-
 }
