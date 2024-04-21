@@ -11,11 +11,11 @@ import java.math.BigInteger;
 public class ReviewModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigInteger reviewid;
+    private long reviewid;
 
-    private  int book_id;
+    private  long book_id;
 
-    private int  userid;
+    private long  userid;
 
     private String comments;
 
