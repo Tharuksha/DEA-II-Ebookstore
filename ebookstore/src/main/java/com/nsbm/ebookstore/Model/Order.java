@@ -12,11 +12,11 @@ import lombok.*;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long orderid;
 
-    @ManyToOne
-    @JoinColumn(name = "userid")
-    private Users users;
+    private  long book_id;
+
+    private long  userid;
 
     @Column(name = "contact_number")
     private String contactNumber;

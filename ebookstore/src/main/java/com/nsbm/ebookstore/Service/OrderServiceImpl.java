@@ -30,43 +30,27 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order updateOrder(Long orderId, Order order) {
-        // Check if the order with the given orderId exists before updating
         if (orderRepository.existsById(orderId)) {
-            // Fetch the existing order from the repository
             Optional<Order> existingOrderOptional = orderRepository.findById(orderId);
             if (existingOrderOptional.isPresent()) {
                 Order existingOrder = existingOrderOptional.get();
-
-                // Update the fields of the existing order with the new values
-                existingOrder.setUsers(order.getUsers());
                 existingOrder.setContactNumber(order.getContactNumber());
                 existingOrder.setDeliveryDate(order.getDeliveryDate());
                 existingOrder.setShippingAddress(order.getShippingAddress());
                 existingOrder.setNote(order.getNote());
-
-                // Save the updated order
                 return orderRepository.save(existingOrder);
             } else {
-                // Handle the case where the order with the given ID does not exist
-                // You can throw an exception, return null, or handle it based on your requirements
-                return null;
+                return null; // No order found with this ID
             }
         } else {
-            // Handle the case where the order with the given ID does not exist
-            // You can throw an exception, return null, or handle it based on your requirements
-            return null;
+            return null; // No order found with this ID
         }
     }
 
     @Override
     public void deleteOrder(Long orderId) {
-        // Check if the order with the given orderId exists before deleting
         if (orderRepository.existsById(orderId)) {
-            // Add any additional logic you need before deleting the order
             orderRepository.deleteById(orderId);
-        } else {
-            // Handle the case where the order does not exist
-            // You can throw an exception, log a message, or handle it based on your requirements
         }
     }
 
@@ -75,4 +59,13 @@ public class OrderServiceImpl implements OrderService {
         Optional<Order> optionalOrder = orderRepository.findById(orderId);
         return optionalOrder.orElse(null);
     }
+
+    public List<Order> GetOrdersByBookId(Long book_id) {
+        return orderRepository.findOrderByBookID(book_id);
+    }
+
+    public List<Order> GetOrdersByUserId(Long userid) {
+        return orderRepository.findOrdersByUserID(userid);
+    }
+
 }

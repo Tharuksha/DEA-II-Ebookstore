@@ -16,7 +16,8 @@ public class OrderController {
 
     public static final String ORDER_BASE_URL = "/api/orders";
     public static final String ALL_ORDERS_ENDPOINT = "/all";
-    public static final String ORDER_BY_ID_ENDPOINT = "/{orderId}";
+
+    public static final String ORDER_BY_ORDER_ID_ENDPOINT = "/{orderId}";
     public static final String DELETE_SUCCESS_MESSAGE = "Deleted Successfully";
     public static final String UPDATE_SUCCESS_MESSAGE = "Updated Successfully";
 
@@ -29,7 +30,7 @@ public class OrderController {
         return orders.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(orders);
     }
 
-    @GetMapping(ORDER_BY_ID_ENDPOINT)
+    @GetMapping(ORDER_BY_ORDER_ID_ENDPOINT)
     public ResponseEntity<Order> getOrderById(@PathVariable Long orderId) {
         Order order = orderService.getOrderById(orderId);
         return order != null ? ResponseEntity.ok(order) : ResponseEntity.notFound().build();
@@ -41,13 +42,13 @@ public class OrderController {
         return new ResponseEntity<>(placedOrder, HttpStatus.OK);
     }
 
-    @DeleteMapping(ORDER_BY_ID_ENDPOINT)
-    public ResponseEntity<?> deleteOrder(@PathVariable Long orderId) {
+    @DeleteMapping(ORDER_BY_ORDER_ID_ENDPOINT)
+    public ResponseEntity<String> deleteOrder(@PathVariable Long orderId) {
         orderService.deleteOrder(orderId);
         return ResponseEntity.ok(DELETE_SUCCESS_MESSAGE);
     }
 
-    @PutMapping(ORDER_BY_ID_ENDPOINT)
+    @PutMapping(ORDER_BY_ORDER_ID_ENDPOINT)
     public ResponseEntity<String> updateOrder(@PathVariable Long orderId, @RequestBody Order order) {
         Order updatedOrder = orderService.updateOrder(orderId, order);
         return ResponseEntity.ok(UPDATE_SUCCESS_MESSAGE);
