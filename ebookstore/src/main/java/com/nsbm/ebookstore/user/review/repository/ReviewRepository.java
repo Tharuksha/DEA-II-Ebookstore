@@ -10,8 +10,8 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository <ReviewModel, Long> {
 
     @Query(value = "SELECT r FROM ReviewModel r WHERE r.book_id = :book_id")
-    List<ReviewModel> findCommentsByBookID (@Param("book_id") int book_id);
+    List<ReviewModel> findCommentsByBookID (@Param("book_id") long book_id);
 
     @Query(value = "SELECT r FROM ReviewModel r WHERE r.userid = :userid")
-    List<ReviewModel> findUsersByBookID (@Param("userid") int userid);
+    List<ReviewModel> findUsersByBookID (@Param("userid") long userid);
 }
