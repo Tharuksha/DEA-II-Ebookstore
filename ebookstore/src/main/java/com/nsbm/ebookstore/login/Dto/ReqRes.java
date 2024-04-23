@@ -9,6 +9,7 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ReqRes {
     private int statusCode;
+    private long userid;
     private String error;
     private String message;
     private String token;
