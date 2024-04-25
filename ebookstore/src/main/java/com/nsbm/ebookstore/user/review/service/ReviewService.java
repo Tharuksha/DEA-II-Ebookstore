@@ -34,10 +34,11 @@ public class ReviewService {
 
     //update comments
 
-    public ReviewModel updateComment(Long id, String comment) {
+    public ReviewModel updateComment(Long id, ReviewModel comment) {
         ReviewModel reviewModel = reviewRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid review id: " + id));
-        reviewModel.setComments(comment);
+        reviewModel.setComments(comment.getComments());
+        reviewModel.setRating(comment.getRating());
 
         return reviewRepository.save(reviewModel);
     }
