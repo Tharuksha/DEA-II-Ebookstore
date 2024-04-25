@@ -21,8 +21,8 @@ public class Order {
     @Column(name = "contact_number")
     private String contactNumber;
 
-    @Column(name = "delivery_date")
-    private String deliveryDate;
+    @Column(name = "order_date")
+    private String orderDate;
 
     @Column(name = "shipping_address")
     private String shippingAddress;

@@ -35,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
             if (existingOrderOptional.isPresent()) {
                 Order existingOrder = existingOrderOptional.get();
                 existingOrder.setContactNumber(order.getContactNumber());
-                existingOrder.setDeliveryDate(order.getDeliveryDate());
+                existingOrder.setOrderDate(order.getOrderDate());
                 existingOrder.setShippingAddress(order.getShippingAddress());
                 existingOrder.setNote(order.getNote());
                 return orderRepository.save(existingOrder);
