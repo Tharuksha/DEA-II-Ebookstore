@@ -1,11 +1,8 @@
 package com.nsbm.ebookstore.user.review.service;
-
 import com.nsbm.ebookstore.user.review.model.ReviewModel;
-import com.nsbm.ebookstore.user.review.model.UserModel;
 import com.nsbm.ebookstore.user.review.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -28,13 +25,11 @@ public class ReviewService {
     }
 
     //delete comments
-
     public void deleteComment(Long id) {
         reviewRepository.deleteById(id);
     }
 
     //update comments
-
     public ReviewModel updateComment(Long id, ReviewModel comment) {
         ReviewModel reviewModel = reviewRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid review id: " + id));
@@ -45,16 +40,16 @@ public class ReviewService {
     }
 
     //get all reviews for certain book id
-    public List<ReviewModel> GetReviewsByBookId(int book_id){
+    public List<ReviewModel> GetReviewsByBookId(long book_id){
         return reviewRepository.findCommentsByBookID(book_id);
     }
 
     //get all users for certain book id
-    public List<ReviewModel> GetUsersByBookId(int userid){
+    public List<ReviewModel> GetUsersByBookId(long userid){
         return reviewRepository.findUsersByBookID(userid);
     }
 
-    public List<ReviewModel>  GetUserBookById(int userid, int book_id){return  reviewRepository.findUserBookById(userid,book_id);}
+    public List<ReviewModel>  GetUserBookById(long userid, long book_id){return  reviewRepository.findUserBookById(userid,book_id);}
 
-    public List<UserModel> GetUserById(long userid){return reviewRepository.findUserById(userid);}
+//    public List<UserModel> GetUserById(long userid){return reviewRepository.findUserById(userid);}
 }
