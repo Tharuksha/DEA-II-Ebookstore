@@ -1,6 +1,7 @@
 package com.nsbm.ebookstore.user.review.controller;
 
 import com.nsbm.ebookstore.user.review.model.ReviewModel;
+import com.nsbm.ebookstore.user.review.model.UserModel;
 import com.nsbm.ebookstore.user.review.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,11 @@ public class ReviewController {
     @GetMapping("/comments/user/{userid}/{book_id}")
     public List<ReviewModel>GetUserBookById(@PathVariable int userid,@PathVariable int book_id){
         return reviewService.GetUserBookById(userid,book_id);
+    }
+
+    @GetMapping("/user/{userid}")
+    public List<UserModel>GetUserById(@PathVariable long userid){
+        return  reviewService.GetUserById(userid);
     }
 
     //add comment

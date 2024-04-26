@@ -1,6 +1,7 @@
 package com.nsbm.ebookstore.user.review.service;
 
 import com.nsbm.ebookstore.user.review.model.ReviewModel;
+import com.nsbm.ebookstore.user.review.model.UserModel;
 import com.nsbm.ebookstore.user.review.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,4 +55,6 @@ public class ReviewService {
     }
 
     public List<ReviewModel>  GetUserBookById(int userid, int book_id){return  reviewRepository.findUserBookById(userid,book_id);}
+
+    public List<UserModel> GetUserById(long userid){return reviewRepository.findUserById(userid);}
 }
