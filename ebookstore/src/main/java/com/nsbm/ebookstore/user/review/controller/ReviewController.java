@@ -33,6 +33,10 @@ public class ReviewController {
         return reviewService.GetUsersByBookId(userid);
     }
 
+    @GetMapping("/comments/user/{userid}/{book_id}")
+    public List<ReviewModel>GetUserBookById(@PathVariable int userid,@PathVariable int book_id){
+        return reviewService.GetUserBookById(userid,book_id);
+    }
 
     //add comment
     @PostMapping("/addComment")
