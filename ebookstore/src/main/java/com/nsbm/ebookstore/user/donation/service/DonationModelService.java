@@ -1,6 +1,7 @@
-package com.nsbm.ebookstore.donation.service;
-import com.nsbm.ebookstore.donation.model.DonationModel;
-import com.nsbm.ebookstore.donation.repository.DonationModelRepository;
+package com.nsbm.ebookstore.user.donation.service;
+
+import com.nsbm.ebookstore.user.donation.model.DonationModel;
+import com.nsbm.ebookstore.user.donation.repository.DonationModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -25,7 +26,7 @@ public class DonationModelService {
     }
 
     public DonationModel updateDonation(Long id, DonationModel donation) {
-        donation.setId(id);
+        donation.setDonationId(id);
         return donationModelRepository.save(donation);
     }
 
