@@ -19,11 +19,11 @@ public class DonationModelController {
     public static final String BASE_PATH = "/donations";
 
     // Endpoints as constants
-    public static final String GET_ALL_DONATIONS = "";
+    public static final String GET_ALL_DONATIONS = "/getall";
     public static final String GET_DONATION_BY_ID = "/{id}";
     public static final String ADD_DONATION = "";
-    public static final String UPDATE_DONATION = "/{id}";
-    public static final String DELETE_DONATION = "/{id}";
+    public static final String UPDATE_DONATION = "/update/{id}";
+    public static final String DELETE_DONATION = "/delete/{id}";
 
     @Autowired
     private DonationModelService donationModelService;
