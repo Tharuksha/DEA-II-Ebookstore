@@ -51,5 +51,4 @@ public class ReviewService {
 
     public List<ReviewModel>  GetUserBookById(long userid, long book_id){return  reviewRepository.findUserBookById(userid,book_id);}
 
-//    public List<UserModel> GetUserById(long userid){return reviewRepository.findUserById(userid);}
 }

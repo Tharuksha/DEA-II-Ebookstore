@@ -23,22 +23,26 @@ public class ReviewController {
         return reviewService.getAllComments();
     }
 
+
+    //Retrieve comments by book ID
     @GetMapping("/comments/{book_id}")
     public List<ReviewModel> getCommentsByBookID(@PathVariable int book_id) {
         return reviewService.GetReviewsByBookId(book_id);
     }
 
+    //Retrieve comments by book id
     @GetMapping("/comments/user/{userid}")
     public List<ReviewModel> GetUsersByBookId(@PathVariable int userid){
         return reviewService.GetUsersByBookId(userid);
     }
 
+    //Retrieve comments by user ID and book id
     @GetMapping("/comments/user/{userid}/{book_id}")
     public List<ReviewModel>GetUserBookById(@PathVariable int userid,@PathVariable int book_id){
         return reviewService.GetUserBookById(userid,book_id);
     }
 
-
+//add comment
     @PostMapping("/addComment")
     public ResponseEntity<ReviewModel> addComment(@RequestBody ReviewModel reviewModel){
         ReviewModel addedReview = reviewService.addComment(reviewModel);
